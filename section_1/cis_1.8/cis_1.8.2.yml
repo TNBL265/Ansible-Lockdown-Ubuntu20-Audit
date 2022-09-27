@@ -7,7 +7,7 @@ file:
     contains:
     - '/^[org/gnome/login-screen]/'
     - '/^banner-message-enable=true/'
-    - '/^banner-message-text='{{ .Vars.ubuntu20cis_warning_banner }}'/'
+    - "/^banner-message-text='{{ .Vars.ubuntu20cis_warning_banner }}'/"
     meta:
       server: 1
       workstation: 1

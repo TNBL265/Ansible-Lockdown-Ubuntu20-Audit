@@ -1,11 +1,33 @@
 {{ if .Vars.ubuntu20cis_rule_3_5_2_6 }}
 command:
-  nft_loopback:
-    title: 3.5.2.6 | Ensure nftables loopback traffic is configured
-    exec: echo "Manual - Please confirm nfttables loopback traffic configured and matched site policy"
+  nft_loopback_interface:
+    title: 3.5.2.6 | Ensure nftables loopback traffic is configured | interface lo
+    exec: nft list ruleset | awk '/hook input/,/}/' | grep 'iif "lo" accept' 
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^*iif \"lo\" accept/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.5.2.6
+  nft_loopback_ipv4:
+    title: 3.5.2.6 | Ensure nftables loopback traffic is configured | ipv4
+    exec: nft list ruleset | awk '/hook input/,/}/' | grep 'ip saddr' 
+    exit-status: 0
+    stdout:
+    - '/^*ip saddr 127.0.0.0/8 counter packets 0 bytes 0 drop/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.5.2.6
+  nft_loopback_ipv6:
+    title: 3.5.2.6 | Ensure nftables loopback traffic is configured | ipv6
+    exec: nft list ruleset | awk '/hook input/,/}/' | grep 'ip6 saddr' 
+    exit-status: 0
+    stdout:
+    - '/^*ip6 saddr ::1 counter packets 0 bytes 0 drop/'
     meta:
       server: 1
       workstation: 1

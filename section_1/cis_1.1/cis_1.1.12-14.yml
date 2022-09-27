@@ -1,0 +1,28 @@
+{{ if .Vars.ubuntu20cis_level_2 }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_12 }}
+mount:
+  /var/tmp:
+    title: |
+       1.1.12 | Ensure /var/tmp partition includes the nodev option 
+       1.1.13 | Ensure /var/tmp partition includes the nosuid option
+       1.1.14 | Ensure /var/tmp partition includes the noexec option
+    exists: true
+    opts:
+    {{ if .Vars.ubuntu20cis_rule_1_1_12 }}
+    - nodev
+    {{ end }}
+    {{ if .Vars.ubuntu20cis_rule_1_1_13 }}
+    - nosuid
+    {{ end }}
+    {{ if .Vars.ubuntu20cis_rule_1_1_14 }}
+    - noexec
+    {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.12
+      - 1.1.13
+      - 1.1.14
+  {{ end }}
+{{ end }}
