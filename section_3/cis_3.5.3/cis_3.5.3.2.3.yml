@@ -2,10 +2,11 @@
 command:
   ipt_def_deny:
     title: 3.5.3.2.3 | Ensure iptables default deny firewall policy
-    exec: echo "Manual - Please confirm iptables default denies are configured and matched site policy"
+    exec: iptables -L | grep Chain | awk '{print $2 $4}' | grep -E -q 'REJECT|DROP' && echo "True"
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^True/'
+    timeout: 15000
     meta:
       server: 1
       workstation: 1

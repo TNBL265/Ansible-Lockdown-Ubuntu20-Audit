@@ -2,10 +2,10 @@
 command:
   ipt_open_ports:
     title: 3.5.3.2.4 | Ensure iptables firewall rules exist for all open ports
-    exec: echo "Manual - Please confirm iptables rules for open ports configured and matched site policy"
+    exec: bash cis_3.5.3.2.4_script.sh
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '!/^FAIL/'
     meta:
       server: 1
       workstation: 1

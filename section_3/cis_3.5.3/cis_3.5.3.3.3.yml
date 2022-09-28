@@ -2,10 +2,10 @@
 command:
   ipt6_def_deny:
     title: 3.5.3.3.3 | Ensure ip6tables default deny firewall policy
-    exec: echo "Manual - Please confirm ip6tables default denies are configured and matched site policy"
+    exec: ip6tables -L | grep Chain | awk '{print $2 $4}' | grep -E -q 'REJECT|DROP' && echo "True" 
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^True/'
     meta:
       server: 1
       workstation: 1

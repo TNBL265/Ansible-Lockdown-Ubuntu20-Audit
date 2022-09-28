@@ -2,10 +2,10 @@
 command:
   ipt6_open_ports:
     title: 3.5.3.3.4 | Ensure ip6tables firewall rules exist for all open ports
-    exec: echo "Manual - Please confirm ip6tables rules for open ports configured and matched site policy"
+    exec: bash cis_3.5.3.3.4_script.sh 
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '!/^FAIL/'
     meta:
       server: 1
       workstation: 1

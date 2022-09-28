@@ -11,10 +11,8 @@ file:
 command:
   nft_rules:
     title: 3.5.2.10 | Ensure nftables rules are permanent | conf file exists
-    exec: echo "Manual - Please review nfttables configuration and matches site policy"
+    exec: grep -E '^\s*include' /etc/nftables.conf
     exit-status: 0
-    stdout:
-    - '!/.*/'
     meta:
       server: 1
       workstation: 1

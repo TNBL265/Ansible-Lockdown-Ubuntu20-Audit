@@ -1,11 +1,33 @@
 {{ if .Vars.ubuntu20cis_rule_3_5_2_8 }}
 command:
-  nft_def_deny:
-    title: 3.5.2.8 | Ensure nftables default deny firewall policy
-    exec: echo "Manual - Please confirm nfttables default denies are configured and matched site policy"
+  nft_def_deny_input:
+    title: 3.5.2.8 | Ensure nftables default deny firewall policy | input
+    exec: nft list ruleset | grep 'hook input' 
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^*policy drop/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.5.2.8
+  nft_def_deny_output:
+    title: 3.5.2.8 | Ensure nftables default deny firewall policy | output
+    exec: nft list ruleset | grep 'hook output' 
+    exit-status: 0
+    stdout:
+    - '/^*policy drop/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.5.2.8
+  nft_def_deny_forward:
+    title: 3.5.2.8 | Ensure nftables default deny firewall policy | forward
+    exec: nft list ruleset | grep 'hook forward' 
+    exit-status: 0
+    stdout:
+    - '/^*policy drop/'
     meta:
       server: 1
       workstation: 1

@@ -151,9 +151,9 @@ ubuntu20cis_rule_3_5_1_7: false
 ubuntu20cis_rule_3_5_2_1: false
 ubuntu20cis_rule_3_5_2_2: false
 ubuntu20cis_rule_3_5_2_3: false
-ubuntu20cis_rule_3_5_2_4: true
-ubuntu20cis_rule_3_5_2_5: true
-ubuntu20cis_rule_3_5_2_6: true
+ubuntu20cis_rule_3_5_2_4: false
+ubuntu20cis_rule_3_5_2_5: false
+ubuntu20cis_rule_3_5_2_6: false
 ubuntu20cis_rule_3_5_2_7: false
 ubuntu20cis_rule_3_5_2_8: false
 ubuntu20cis_rule_3_5_2_9: false
@@ -165,11 +165,11 @@ ubuntu20cis_rule_3_5_3_1_3: false
 ubuntu20cis_rule_3_5_3_2_1: false
 ubuntu20cis_rule_3_5_3_2_2: false
 ubuntu20cis_rule_3_5_3_2_3: false
-ubuntu20cis_rule_3_5_3_2_4: false
+ubuntu20cis_rule_3_5_3_2_4: true
 ubuntu20cis_rule_3_5_3_3_1: false
 ubuntu20cis_rule_3_5_3_3_2: false
 ubuntu20cis_rule_3_5_3_3_3: false
-ubuntu20cis_rule_3_5_3_3_4: false
+ubuntu20cis_rule_3_5_3_3_4: true
 
 # Section 4 rules
 ubuntu20cis_rule_4_1_1_1: false
@@ -389,7 +389,7 @@ ubuntu20cis_ipv6_required: false
 ubuntu20cis_is_router: false
 
 
-ubuntu20cis_firewall: nftables
+ubuntu20cis_firewall: iptables
 
 # ubuntu20_firewall: iptables
 ubuntu20_default_firewall_zone: public

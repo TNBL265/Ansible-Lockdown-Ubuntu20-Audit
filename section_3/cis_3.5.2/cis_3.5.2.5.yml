@@ -5,7 +5,7 @@ command:
     exec: nft list ruleset | grep 'hook input' 
     exit-status: 0
     stdout:
-    - '/^*hook input priority*/'
+    - '/^*chain*hook input priority*/'
     meta:
       server: 1
       workstation: 1
@@ -16,7 +16,7 @@ command:
     exec: nft list ruleset | grep 'hook output' 
     exit-status: 0
     stdout:
-    - '/^*hook output priority*/'
+    - '/^*chain*hook output priority*/'
     meta:
       server: 1
       workstation: 1
@@ -27,7 +27,7 @@ command:
     exec: nft list ruleset | grep 'hook forward' 
     exit-status: 0
     stdout:
-    - '/^*hook forward priority*/'
+    - '/^*chain*hook forward priority*/'
     meta:
       server: 1
       workstation: 1
