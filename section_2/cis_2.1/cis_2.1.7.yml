@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_nfs_server }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_7 }}
+{{ if .Vars.ubuntu20cis_rule_2_1_7 }}
 package:
   nfs-kernel-server:
     title: 2.1.7 | Ensure NFS is not installed
@@ -8,5 +7,4 @@ package:
       server: 1
       workstation: 1
       CIS_ID: 2.1.7
-  {{ end }}
 {{ end }}

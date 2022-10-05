@@ -1,9 +1,10 @@
 {{ if .Vars.ubuntu20cis_level_2 }}
   {{ if .Vars.ubuntu20cis_rule_1_1_11 }}
-mount:
+command:
   /var/tmp:
     title: 1.1.11 | Ensure separate partition exists for /var/tmp
-    exists: true
+    exec: ls /var/tmp
+    exit-status: 0
     meta:
       server: 1
       workstation: 1

@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_gui }}
-  {{ if .Vars.ubuntu20cis_rule_1_8_2 }}
+{{ if .Vars.ubuntu20cis_rule_1_8_2 }}
 file:
   /etc/gdm3/greeter.dconf-defaults:
     title: 1.8.2 | Ensure GDM login banner is configured
@@ -7,11 +6,9 @@ file:
     contains:
     - '/^[org/gnome/login-screen]/'
     - '/^banner-message-enable=true/'
-    - "/^banner-message-text='{{ .Vars.ubuntu20cis_warning_banner }}'/"
     meta:
       server: 1
       workstation: 1
       CIS_ID: 
       - 1.8.2
-  {{ end }}
 {{ end }}

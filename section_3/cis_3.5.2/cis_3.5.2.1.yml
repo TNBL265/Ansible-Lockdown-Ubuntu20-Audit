@@ -1,8 +1,9 @@
 {{ if .Vars.ubuntu20cis_rule_3_5_2_1 }}
-package:
-  nftables:
+command:
+  nftables_installed:
     title: 3.5.2.1 | Ensure nftables is installed
-    installed: true
+    exec: which nft
+    exit-status: 0
     meta:
       server: 1
       workstation: 1

@@ -1,5 +1,5 @@
-{{ if not .Vars.ubuntu20cis_cups_server }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_4 }}
+#{{ if not .Vars.ubuntu20cis_cups_server }}
+{{ if .Vars.ubuntu20cis_rule_2_1_4 }}
 package:
   cups:
     title: 2.1.4 | Ensure CUPS Server is not installed
@@ -8,5 +8,5 @@ package:
       server: 1
       workstation: 2
       CIS_ID: 2.1.4
-  {{ end }}
 {{ end }}
+#{{ end }}

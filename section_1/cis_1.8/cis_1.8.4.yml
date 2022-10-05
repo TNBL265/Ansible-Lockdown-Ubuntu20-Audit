@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_gui }}
-  {{ if .Vars.ubuntu20cis_rule_1_8_4 }}
+{{ if .Vars.ubuntu20cis_rule_1_8_4 }}
 file:
   /etc/gdm3/custom.conf:
     title: 1.8.4 | Ensure XDCMP is not enabled
@@ -11,5 +10,4 @@ file:
       workstation: 1
       CIS_ID: 
       - 1.8.4
-  {{ end }}
 {{ end }}

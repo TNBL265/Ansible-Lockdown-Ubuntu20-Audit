@@ -1,5 +1,4 @@
-{{ if eq .Vars.ubuntu20cis_time_service "chrony" }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_1_4 }}
+{{ if .Vars.ubuntu20cis_rule_2_1_1_4 }}
 service:
   chronyd:
     title: 2.1.1.4 | Ensure chrony is configured | chronyd service
@@ -39,7 +38,7 @@ file:
     contains:
     - '/^restrict -4 default kod nomodify notrap nopeer noquery/'
     - '/^restrict -6 default kod nomodify notrap nopeer noquery/'
-    - "/^server '{{ .Vars.ubuntu20cis_ntp_servers }}'/"
+    - "/^server */"
     meta:
       server: 1
       workstation: 1
@@ -54,5 +53,4 @@ file:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.4
-  {{ end }}
-{{ end  }}
+{{ end }}

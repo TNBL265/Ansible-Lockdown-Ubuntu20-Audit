@@ -1,33 +1,27 @@
 {{ if .Vars.ubuntu20cis_rule_2_1_1_1 }}
-  {{ if eq .Vars.ubuntu20cis_time_service "timesyncd" }}
-service:
-  timesyncd:
+command:
+  timesyncd_service:
     title: 2.1.1.1 | Ensure time synchronization is in use | timesyncd
-    enabled: true
+    exec: systemctl status time-sync.target | grep Active | grep -E "*active"
+    exit-status: 0
     meta:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.1
-  {{ end }}
-{{ if ne .Vars.ubuntu20cis_time_service "timesyncd" }}
-package:
-  {{ if eq .Vars.ubuntu20cis_time_service "chrony" }}
-  chrony:
+  chrony_package:
     title: 2.1.1.1 | Ensure time synchronization is in use | chrony
-    installed: true
+    exec: apt list --installed | grep chrony/focal
+    exit-status: 0
     meta:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.1
-  {{ end  }}
-  {{ if eq .Vars.ubuntu20cis_time_service "ntp" }}
-  ntp:
+  ntp_package:
     title: 2.1.1.1 | Ensure time synchronization is in use | ntp
-    installed: true
+    exec: apt list --installed | grep ntp/focal
+    exit-status: 0
     meta:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.1
-  {{ end }}
-{{ end  }}
 {{ end }}

@@ -1,8 +1,9 @@
 {{ if .Vars.ubuntu20cis_rule_3_5_1_1 }}
-package:
+command:
   ufw:
     title: 3.5.1.1 | Ensure ufw is installed
-    installed: true
+    exec: apt list --installed | grep ufw
+    exit-status: 0
     meta:
       server: 1
       workstation: 1

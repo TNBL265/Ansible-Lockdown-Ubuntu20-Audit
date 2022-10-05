@@ -1,6 +1,6 @@
-{{ if not .Vars.ubuntu20cis_apparmor_disable }}
+#{{ if not .Vars.ubuntu20cis_apparmor_disable }}
+{{ if .Vars.ubuntu20cis_rule_4_1_6 }}
 command:
-  {{ if .Vars.ubuntu20cis_rule_4_1_6 }}
   auditd_MAC_cnf:
     title: 4.1.6 | Ensure events that modify the system's Mandatory Access Controls are collected | Config
     exec: grep MAC-policy /etc/audit/rules.d/*.rules
@@ -25,5 +25,5 @@ command:
       workstation: 2
       CIS_ID: 
       - 4.1.6
-  {{ end }}
+#  {{ end }}
 {{ end }}

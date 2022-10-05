@@ -2,7 +2,7 @@
 command:
   ipt_open_ports:
     title: 3.5.3.2.4 | Ensure iptables firewall rules exist for all open ports
-    exec: bash cis_3.5.3.2.4_script.sh
+    exec: bash section_3/cis_3.5.3/cis_3.5.3.2.4_script.sh
     exit-status: 0
     stdout:
     - '!/^FAIL/'

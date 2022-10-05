@@ -2,7 +2,7 @@
 command:
   ipt6_loopback_input:
     title: 3.5.3.3.1 | Ensure ip6tables loopback traffic is configured | INPUT
-    exec: ip6tables -L INPUT -v -n | tail -n +2 | grep -E -q 'DORP|ACCEPT|::/1|::/0' && echo "True" 
+    exec: ip6tables -L INPUT -v -n | tail -n +2 | grep -E -q 'DROP|ACCEPT|::/1|::/0' && echo "True" 
     exit-status: 0
     stdout:
     - '/^True/'

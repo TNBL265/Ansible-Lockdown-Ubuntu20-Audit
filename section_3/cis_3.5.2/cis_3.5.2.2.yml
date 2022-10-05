@@ -1,8 +1,9 @@
 {{ if .Vars.ubuntu20cis_rule_3_5_2_2 }}
-package:
-  ufw:
+command:
+  ufw_installed:
     title: 3.5.2.2 | Ensure ufw is uninstalled or disabled with nftables
-    installed: false
+    exec: which ufw
+    exit-status: 0
     meta:
       server: 1
       workstation: 1

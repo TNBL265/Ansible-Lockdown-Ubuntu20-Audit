@@ -2,7 +2,7 @@
 command:
   ipt_loopback_input:
     title: 3.5.3.2.1 | Ensure iptables loopback traffic is configured | INPUT
-    exec: iptables -L INPUT -v -n | tail -n +2 | grep -E -q 'DORP|ACCEPT|127.0.0.0/8|0.0.0.0/0' && echo "True"
+    exec: iptables -L INPUT -v -n | tail -n +2 | grep -E -q 'DROP|ACCEPT|127.0.0.0/8|0.0.0.0/0' && echo "True"
     exit-status: 0
     stdout:
     - '/^True/'
