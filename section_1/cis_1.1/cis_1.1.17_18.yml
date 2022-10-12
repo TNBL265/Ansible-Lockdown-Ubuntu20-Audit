@@ -4,15 +4,24 @@ mount:
   /home:
     title: 1.1.17 | Ensure seperate partition for /home with mount options
     exists: true
-    {{ if .Vars.ubuntu20cis_rule_1_1_18 }}
-    opts:
-    - nodev
-    {{ end }}
     meta:
       server: 2
       workstation: 2
       CIS_ID: 
       - 1.1.17
+  {{ end }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_18 }}
+command:
+  home_nodev:
+    title: 1.1.18 | Ensure /home partition includes the nodev option
+    exec: findmnt -n /home | grep -v nodev
+    exit-status: 0
+    stdout:
+    - '!/.*/' 
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
       - 1.1.18
   {{ end }}
 {{ end }}

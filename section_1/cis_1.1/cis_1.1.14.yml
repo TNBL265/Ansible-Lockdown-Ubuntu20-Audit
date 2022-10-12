@@ -1,0 +1,16 @@
+{{ if .Vars.ubuntu20cis_level_2 }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_14 }}
+command:
+  /var/tmp_noexec:
+    title: 1.1.14 | Ensure /var/tmp partition includes the noexec option
+    exit-status: 0
+    exec: findmnt -n /var/tmp | grep noexec
+    stdout:
+    - '/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.14
+  {{ end }}
+{{ end }}

@@ -1,0 +1,16 @@
+{{ if .Vars.ubuntu20cis_level_1 }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_8 }}
+command:
+  /dev/shm_nosuid:
+    title: 1.1.8 | Ensure nosuid option set on /dev/shm partition
+    exit-status: 0
+    exec: findmnt -n /dev/shm | grep nosuid
+    stdout:
+    - '/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.8
+  {{ end }}
+{{ end }}

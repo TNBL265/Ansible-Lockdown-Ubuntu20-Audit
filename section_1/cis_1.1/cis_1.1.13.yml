@@ -1,0 +1,16 @@
+{{ if .Vars.ubuntu20cis_level_2 }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_13 }}
+command:
+  /var/tmp_nosuid:
+    title: 1.1.13 | Ensure /var/tmp partition includes the nosuid option
+    exit-status: 0
+    exec: findmnt -n /var/tmp | grep nosuid
+    stdout:
+    - '/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.13
+  {{ end }}
+{{ end }}

@@ -1,0 +1,39 @@
+{{ if .Vars.ubuntu20cis_level_1 }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_2 }}
+mount:
+  /tmp:
+    title: 1.1.2 | Ensure /tmp is configured with mount options
+    exists: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.2
+      CISv8:
+      - 3.3
+      - 4.1
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+  {{ end }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_3 }} 
+command:
+  tmp_nodev:
+    title: 1.1.3 | Ensure nodev option set on /tmp partition
+    exit-status: 0
+    exec: findmnt -n /tmp | grep nodev
+    stdout:
+    - '/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.3
+      CISv8:
+      - 3.3
+      - 4.1
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+  {{ end }}
+{{ end }}

@@ -1,23 +1,27 @@
 {{ if .Vars.ubuntu20cis_level_1 }}
   {{ if .Vars.ubuntu20cis_rule_1_4_2 }}
-file:
-  /boot:
+command:
+  boot_password_set:
     title: 1.4.2 | Ensure bootloader password is set
-           1.4.3 | Ensure permissions on bootloader config are configured
-    exists: true
-    contains: 
-    - "/set superusers=root/"
-    - "/password_pbkdf2 root*/"
-    {{ if .Vars.ubuntu20cis_rule_1_4_3 }}
-    owner: root
-    group: root
-    mode: "0400"
-    {{ end }}
+    exit-status: 0
+    exec: cat /boot/grub/grub.cfg | grep -E '(set superusers=root|password_pbkdf2 root)'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 1.4.2
+  {{ end }}
+  {{ if .Vars.ubuntu20cis_rule_1_4_3 }}
+file:
+  /boot/grub/grub.cfg:
+    title: 1.4.3 | Ensure permissions on bootloader config are configured
+    owner: root
+    group: root
+    mode: "0400"
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
       - 1.4.3
   {{ end }}
 {{ end }}

@@ -1,0 +1,22 @@
+{{ if .Vars.ubuntu20cis_level_1 }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_4 }}
+command:
+  tmp_nosuid:
+    title: 1.1.4 | Ensure nosuid option set on /tmp partition
+    exit-status: 0
+    exec: findmnt -n /tmp | grep nosuid
+    stdout:
+    - '/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.4
+      CISv8:
+      - 3.3
+      - 4.1
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+  {{ end }}
+{{ end }}

@@ -1,0 +1,27 @@
+{{ if .Vars.ubuntu20cis_level_1 }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_6 }}
+mount:
+  /dev/shm:
+    title: 1.1.6 | Ensure /dev/shm is configured with mount options
+    exists: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.6
+  {{ end }}
+  {{ if .Vars.ubuntu20cis_rule_1_1_7 }}
+command:
+  /dev/shm_nodev:
+    title: 1.1.7 | Ensure nodev option set on /dev/shm partition
+    exit-status: 0
+    exec: findmnt -n /dev/shm | grep nodev
+    stdout:
+    - '/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.7
+  {{ end }}
+{{ end }}
