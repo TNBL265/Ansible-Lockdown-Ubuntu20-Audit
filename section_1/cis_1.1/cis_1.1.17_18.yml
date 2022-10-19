@@ -2,7 +2,7 @@
   {{ if .Vars.ubuntu20cis_rule_1_1_17 }}
 mount:
   /home:
-    title: 1.1.17 | Ensure seperate partition for /home with mount options
+    title: 1.1.17 | Ensure separate partition exists for /home
     exists: true
     meta:
       server: 2

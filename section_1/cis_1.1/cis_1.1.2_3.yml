@@ -2,7 +2,7 @@
   {{ if .Vars.ubuntu20cis_rule_1_1_2 }}
 mount:
   /tmp:
-    title: 1.1.2 | Ensure /tmp is configured with mount options
+    title: 1.1.2 | Ensure /tmp is configured
     exists: true
     meta:
       server: 1

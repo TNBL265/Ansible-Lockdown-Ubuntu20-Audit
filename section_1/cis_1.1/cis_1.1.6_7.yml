@@ -2,7 +2,7 @@
   {{ if .Vars.ubuntu20cis_rule_1_1_6 }}
 mount:
   /dev/shm:
-    title: 1.1.6 | Ensure /dev/shm is configured with mount options
+    title: 1.1.6 | Ensure /dev/shm is configured
     exists: true
     meta:
       server: 1
