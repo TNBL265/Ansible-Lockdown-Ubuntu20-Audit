@@ -2,10 +2,10 @@
 command:
   gpg_configd:
     title: 1.2.2 | Ensure GPG keys are configured 
-    exec: echo "Please check manually for gpg keys"
+    exec: echo "Manual - Please validate for gpg keys configuration"
     exit-status: 0
     stdout:
-    - '!/^Please.*'
+    - '!/^Manual/'
     meta:
       server: 1
       workstation: 2

@@ -2,10 +2,10 @@
 command:
   repos_configd:
     title: 1.2.1 | Ensure package manager repositories are configured
-    exec: echo "Please check manually for configured repos"
+    exec: echo "Manual - Please check manually for configured repos"
     exit-status: 0
     stdout:
-    - '!/^Please.*'
+    - '!/^Manual/'
     meta:
       server: 1
       workstation: 2

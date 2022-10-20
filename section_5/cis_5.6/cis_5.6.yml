@@ -3,7 +3,7 @@
 command:
   restricted_root:
     title: 5.6 | Ensure root login is restricted to system console
-    exec: echo "Manual validation of root login restriction"
+    exec: echo "Manual - Please validate root login restriction"
     stdout:
     - '!/^Manual/'
     meta:
