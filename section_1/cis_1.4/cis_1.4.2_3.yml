@@ -12,12 +12,12 @@ command:
       - 1.4.2
   {{ end }}
   {{ if .Vars.ubuntu20cis_rule_1_4_3 }}
-file:
-  /boot/grub/grub.cfg:
+  /boot/grub/grub.cfg_permission:
     title: 1.4.3 | Ensure permissions on bootloader config are configured
-    owner: root
-    group: root
-    mode: "0400"
+    exit-status: 0
+    exec: stat /boot/grub/grub.cfg
+    stdout:
+    - '/Access: (0444.*Uid.*root.*Gid.*root/'
     meta:
       server: 1
       workstation: 1
