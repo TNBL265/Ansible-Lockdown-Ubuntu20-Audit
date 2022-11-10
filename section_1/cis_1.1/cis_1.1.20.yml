@@ -6,7 +6,7 @@ command:
     exit-status: 0
     exec: "if [ `grep -c -i floppy /etc/fstab` = 1 ] ; then if [ `grep -c -E 'floppy.*nosuid' /etc/fstab` -eq 1 ]; then echo FAIL; fi; else echo Passed_Check; fi"
     stdout: 
-    - Passed_Check 
+    - '/Passed_Check/'
     meta:
       server: 1
       workstation: 1
@@ -16,7 +16,7 @@ command:
     exit-status: 0
     exec: "if [ `grep -c -i cdrom /etc/fstab` = 1 ] ; then if [ `grep -c -E 'cdrom.*nosuid' /etc/fstab` -eq 1 ]; then echo FAIL; fi; else echo Passed_Check; fi"
     stdout: 
-    - Passed_Check
+    - '/Passed_Check/'
     meta:
       server: 1
       workstation: 1

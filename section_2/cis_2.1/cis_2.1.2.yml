@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_xwindows_required }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_2 }}
+{{ if .Vars.ubuntu20cis_rule_2_1_2 }}
 package:
   xserver-xorg:
     title: 2.1.2 | Ensure X Window System is not installed
@@ -8,5 +7,4 @@ package:
       server: 1
       workstation: NA
       CIS_ID: 2.1.2
-  {{ end }}
 {{ end }}

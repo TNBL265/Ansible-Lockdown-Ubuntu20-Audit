@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_snmp_server }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_14 }}
+{{ if .Vars.ubuntu20cis_rule_2_1_14 }}
 package:
   snmpd:
     title: 2.1.14 | Ensure SNMP Server is not installed
@@ -8,5 +7,4 @@ package:
       server: 1
       workstation: 1
       CIS_ID: 2.1.14
-  {{ end }}
 {{ end }}

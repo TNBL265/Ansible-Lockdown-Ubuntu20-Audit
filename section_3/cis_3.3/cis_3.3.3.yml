@@ -15,7 +15,7 @@ kernel-param:
       server: 1
       workstation: 1
       CIS_ID:
-      - 3.2.3
+      - 3.3.3
 command:
   ipv4_all_sec_redirects:
     title: 3.3.3 | Ensure secure ICMP redirects are not accepted | ipv4 all sec redirects conf

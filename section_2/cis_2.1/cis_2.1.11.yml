@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_is_mail_server }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_11 }}
+{{ if .Vars.ubuntu20cis_rule_2_1_11 }}
 package:
   dovecot-imapd:
     title: 2.1.11 | Ensure IMAP and POP3 server are not installed | imap
@@ -15,5 +14,4 @@ package:
       server: 1
       workstation: 1
       CIS_ID: 2.1.11
-  {{ end }}
 {{ end }}

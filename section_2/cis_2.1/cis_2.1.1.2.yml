@@ -1,5 +1,4 @@
 {{ if .Vars.ubuntu20cis_rule_2_1_1_2 }}
-#  {{ if eq .Vars.ubuntu20cis_time_service "timesyncd" }}
 service:
   timesyncd:
     title: 2.1.1.2 | Ensure systemd-timesyncd is configured | timesync service
@@ -9,9 +8,7 @@ service:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.2
-  {{ end }}
 package:
-#  {{ if ne .Vars.ubuntu20cis_time_service "ntp" }}
   ntp:
     title: 2.1.1.2 | Ensure systemd-timesyncd is configured | ntp not installed
     installed: false
@@ -19,8 +16,6 @@ package:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.2
-#  {{ end }}
-#  {{ if ne .Vars.ubuntu20cis_time_service "chrony" }}
   chrony:
     title: 2.1.1.2 | Ensure systemd-timesyncd is configured | chrony not installed
     installed: false
@@ -28,16 +23,11 @@ package:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.2
-#  {{ end }}
-#  {{ if eq .Vars.ubuntu20cis_time_service "timesyncd" }}
 file:
   /etc/systemd/timesyncd.conf:
     title: 2.1.1.2 | Ensure systemd-timesyncd is configured | timesyncd.conf
     exists: true
     contains:
-#    - "/^NTP='{{ .Vars.ubuntu20cis_ntp_servers }}'/"
-#    - "/^FallbackNTP='{{ .Vars.ubuntu20cis_ntp_fallback }}'/"
-#    - "/^RootDistanceMax='{{ .Vars.ubuntu20cis_ntp_root_distance }}'/"
     - "/^NTP=*/"
     - "/^FallbackNTP=*/"
     - "/^RootDistanceMax=*/"
@@ -45,5 +35,4 @@ file:
       server: 1
       workstation: 1
       CIS_ID: 2.1.1.2
-#  {{ end }}
 {{ end }}

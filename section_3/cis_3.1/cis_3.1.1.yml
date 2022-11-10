@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_ipv6_required }}
- {{ if .Vars.ubuntu20cis_rule_3_1_1 }}
+{{ if .Vars.ubuntu20cis_rule_3_1_1 }}
 command:
   grub_ipv6:
     title: 3.1.1 | Disable IPv6 | via grub boot
@@ -31,5 +30,4 @@ file:
       server: 2
       workstation: 2
       CIS_ID: 3.3.1
-  {{ end }}
 {{ end }}

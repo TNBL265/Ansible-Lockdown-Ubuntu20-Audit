@@ -9,9 +9,10 @@ command:
       - 0
       - 1
     stdout:
-    {{ range .Vars.ubuntu20cis_sshd_access }}
-    - {{ . }}
-    {{ end }}
+    - '/AllowUser/'
+    - '/AllowGroup/'
+    - '/DenyUser/'
+    - '/DenyGroup/'
     meta:
       server: 1
       workstation: 1

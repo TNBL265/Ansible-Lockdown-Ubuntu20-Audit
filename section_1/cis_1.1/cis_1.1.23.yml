@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_allow_autofs}}
-  {{ if .Vars.ubuntu20cis_rule_1_1_23 }}
+{{ if .Vars.ubuntu20cis_rule_1_1_23 }}
 service:
   autofs:
     title: 1.1.23 | Disable Automounting
@@ -9,5 +8,4 @@ service:
       server: 1
       workstation: 2
       CIS_ID: 1.1.23
-  {{ end }}
 {{ end }}

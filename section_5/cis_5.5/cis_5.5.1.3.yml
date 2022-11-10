@@ -6,7 +6,7 @@ command:
     exec: grep -Ei "^PASS_WARN_AGE" /etc/login.defs
     exit-status: 0
     stdout:
-    - '/^PASS_WARN_AGE\s*{{ .Vars.ubuntu20cis_pass.warn_age }}/'
+    - '/^PASS_WARN_AGE\s*7/'
     - '!/^PASS_WARN_AGE\s*[1-6]/'
     meta:
       server: 1

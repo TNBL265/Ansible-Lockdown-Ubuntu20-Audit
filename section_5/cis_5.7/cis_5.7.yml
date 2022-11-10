@@ -5,11 +5,7 @@ file:
     title: 5.7 | Ensure access to the su command is restricted | pam.d/su
     exists: true
     contains:
-      {{ if eq .Vars.ubuntu20cis_sugroup "wheel" }}
       - '/^auth.*required.*pam_wheel.so\suse_uid/'
-      {{ else }}
-      - '/^auth.*required.*pam_wheel.so\suse_uid$\sgroup={{ .Vars.ubuntu20cis_sugroup }}/'
-      {{ end }}
     meta:
       server: 1
       workstation: 1
@@ -19,7 +15,7 @@ file:
     title: 5.7 | Ensure access to the su command is restricted | /etc/group
     exists: true
     contains:
-    - '/^{{ .Vars.ubuntu20cis_sugroup }}:x:[1-9][0-9]{1,4}:$/'
+    - '/^wheel:x:[1-9][0-9]{1,4}:$/'
     meta:
       server: 1
       workstation: 1

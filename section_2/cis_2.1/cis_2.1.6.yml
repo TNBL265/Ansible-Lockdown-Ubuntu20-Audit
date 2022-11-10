@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_ldap_server }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_6 }}
+{{ if .Vars.ubuntu20cis_rule_2_1_6 }}
 package:
   slapd:
     title: 2.1.6 | Ensure LDAP server is not installed
@@ -8,5 +7,4 @@ package:
       server: 1
       workstation: 1
       CIS_ID: 2.1.6
-  {{ end }}
 {{ end }}

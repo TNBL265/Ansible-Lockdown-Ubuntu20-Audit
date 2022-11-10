@@ -6,9 +6,9 @@ command:
     exec: grep -E "action" /etc/audit/auditd.conf
     exit-status: 0
     stdout:
-    - space_left_action = {{ .Vars.ubuntu20cis_auditd.space_left_action }}
-    - action_mail_acct = {{ .Vars.ubuntu20cis_auditd.action_mail_acct }}
-    - '/^admin_space_left_action = {{ .Vars.ubuntu20cis_auditd.admin_space_left_action }}/'
+    - '/space_left_action = email/'
+    - '/action_mail_acct = root/'
+    - '/^admin_space_left_action = halt/'
     meta:
       server: 2
       workstation: 2

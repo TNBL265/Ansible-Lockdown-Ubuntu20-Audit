@@ -1,128 +1,101 @@
-# Ubuntu 20.04 Goss config
-
+# Ubuntu 20.04 Audit
 ## Overview
+This repository is forked from [ansible-lockdown/UBUNTU20-CIS-Audit](https://github.com/ansible-lockdown/UBUNTU20-CIS-Audit/tree/devel) branch: `devel` and commit: `b0b484f198b145eb7cbe8cc0e8a7b0abab3003b5`
 
-based on CIS 1.0
+## Perform Audit
+```shell
+# Install GOSS
+sudo curl -L https://github.com/aelsabbahy/goss/releases/latest/download/goss-linux-amd64 -o /usr/local/bin/goss
+sudo chmod +rx /usr/local/bin/goss
 
-Set of configuration files and directories to run the first stages of CIS of Ubuntu 20.04 servers
+# Install Git and clone repo
+sudo apt update
+sudo apt install git -y
 
-This is configured in a directory structure level.
+cd /var/tmp/
+sudo git clone --single-branch --branch dev https://bitbucket.it.keysight.com/scm/kps011/ansible-lockdown-ubuntu20-audit.git
 
-This could do with further testing but sections 1.x should be complete
+cd ansible-lockdown-ubuntu20-audit
 
-Goss is run based on the goss.yml file in the top level directory. This specifies the configuration.
-
-This repository is forked from [Ansible-Lockdown(Ubuntu20-Audit)](https://github.com/ansible-lockdown/UBUNTU20-CIS-Audit) branch: devel and commit: b0b484f198b145eb7cbe8cc0e8a7b0abab3003b5 
-
-## variables
-
-file: vars/cis.yml
-
-Please refer to the file for all options and their meanings
-
-CIS listed variable for every control/benchmark can be turned on/off or section
-
-- other controls
-enable_selinux
-run_heavy_tasks
-
-- bespoke options
-If a site has specific options e.g. password complexity these can also be set.
-
-## Usage
-
-You must have [goss](https://github.com/aelsabbahy/goss/) available to your host you would like to test.
-
-You must have root access to the system as some commands require privilege information.
-
-- Run as root not sudo due to sudo and shared memory access
-
-Assuming you have already clone this repository you can run goss from where you wish.
-
-- full check
-
-```sh
-# {{path to your goss binary}} --vars {{ path to the vars file }} -g {{path to your clone of this repo }}/goss.yml --validate
-
+# Run audit
+sudo ./run_audit.sh
 ```
 
-example:
+## Report Dissection
+- Report will be generated at `/var/tmp` with the naming format `audit_ansible-lockdown-ubuntu20_${epoch_time}.json`
+- N.B.: each CIS rule can have multiple goss checks
+- 2 main keys:
+  - summary: high level goss statistic
+    ```json
+    "summary": {
+      "failed-count": 142,
+      "summary-line": "Count: 372, Failed: 142, Duration: 42.973s",
+      "test-count": 372,
+      "total-duration": 42972592899
+    }
+    ```
+    - where:
+      - `failed-count`: number of failed checks
+      - `summary-line`: summary of `test-count`, `failed-count` and `total-duration` in `s`
+      - `test-count`: total number of checks
+      - `total-duration`: time taken to perform all checks in `ns`
 
-```sh
-# /usr/local/bin/goss --vars ../vars/cis.yml -g /home/bolly/rh8_cis_goss/goss.yml validate
-......FF....FF................FF...F..FF.............F........................FSSSS.............FS.F.F.F.F.........FFFFF....
-
-Failures/Skipped:
-
-Title: 1.6.1 Ensure core dumps are restricted (Automated)_sysctl
-Command: suid_dumpable_2: exit-status:
-Expected
-    <int>: 1
-to equal
-    <int>: 0
-Command: suid_dumpable_2: stdout: patterns not found: [fs.suid_dumpable = 0]
-
-
-Title: 1.4.2 Ensure filesystem integrity is regularly checked (Automated)
-Service: aidecheck: enabled:
-Expected
-    <bool>: false
-to equal
-    <bool>: true
-Service: aidecheck: running:
-Expected
-    <bool>: false
-to equal
-    <bool>: true
-
-< ---------cut ------- >
-
-Title: 1.1.22 Ensure sticky bit is set on all world-writable directories
-Command: version: exit-status:
-Expected
-    <int>: 0
-to equal
-    <int>: 123
-
-Total Duration: 5.102s
-Count: 124, Failed: 21, Skipped: 5
-
-```
-
-- running a particular section of tests
-
-```sh
-# /usr/local/bin/goss -g /home/bolly/rh8_cis_goss/section_1/cis_1.1/cis_1.1.22.yml  validate
-............
-
-Total Duration: 0.033s
-Count: 12, Failed: 0, Skipped: 0
-
-```
-
-- changing the output
-
-```sh
-# /usr/local/bin/goss -g /home/bolly/rh8_cis_goss/section_1/cis_1.1/cis_1.1.22.yml  validate -f documentation
-Title: 1.1.20 Check for removeable media nodev
-Command: floppy_nodev: exit-status: matches expectation: [0]
-Command: floppy_nodev: stdout: matches expectation: [OK]
-< -------cut ------- >
-Title: 1.1.20 Check for removeable media noexec
-Command: floppy_noexec: exit-status: matches expectation: [0]
-Command: floppy_noexec: stdout: matches expectation: [OK]
-
-
-Total Duration: 0.022s
-Count: 12, Failed: 0, Skipped: 0
-```
-
-## Extra settings
-
-Ability to add your own requirements is available in several sections
-
-## further information
-
-- [goss documentation](https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#patterns)
-- [CIS standards](https://www.cisecurity.org)
-
+  - results: contains a list of goss check in the following format
+    ```json
+    "results": [
+        ...,
+        {
+            "duration": 597607,
+            "err": null,
+            "expected": [
+                "/^Storage=none/",
+                "/^ProcessSizeMax=0/"
+            ],
+            "found": null,
+            "human": "",
+            "meta": {
+                "CIS_ID": [
+                    "1.5.1"
+                ],
+                "CISv8": [
+                    4.1
+                ],
+                "CISv8_IG1": true,
+                "CISv8_IG2": true,
+                "CISv8_IG3": true,
+                "server": 1,
+                "workstation": "NA"
+            },
+            "property": "contains",
+            "resource-id": "/etc/systemd/coredump.conf",
+            "resource-type": "File",
+            "result": 1,
+            "successful": false,
+            "summary-line": "File: /etc/systemd/coredump.conf: contains: patterns not found: [/^Storage=none/, /^ProcessSizeMax=0/]",
+            "test-type": 2,
+            "title": "1.5.1 | Ensure core dumps are restricted | coredump.conf"
+        },
+        ...
+    ],
+    ```
+    - where: 
+      - `duration`: time taken to run the check in ns
+      - `err`: error encountered during goss audit
+      - `expected`: desired value
+      - `found`: actual value
+      - `human`: autogenerated string using `expected` and `found`
+      - `meta`: metadata of the corresponding CIS rule
+      - `property`: specific check performed correspond to resource-type
+      - `resource-id`: UID of goss check
+      - `resource-type`: type of goss check (availabe tests [here](https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#available-tests))
+      - `result`: 
+        - goss result in integer: `0` if `found == expected` else `1` 
+        - special case: `2` if skipped, `3` if unknown
+      - `successful`: goss result in string: `true` if `found == expected` else `false`
+      - `summary-line`: autogenerated string using `resource-type`, `resource-id`, `property`, `expected` and `found`
+      - `test-type:` 
+        - `1` if skipped else `0`
+        - special case: `2` when
+          - `resource-type == Command` and `property == stdout`
+          - `resource-type == File` and `property == contains`
+      - `title`: title of the corresponding CIS rule

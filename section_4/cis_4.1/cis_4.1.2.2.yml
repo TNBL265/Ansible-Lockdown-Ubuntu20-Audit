@@ -6,7 +6,7 @@ command:
     exec: grep -E "^max_log_file_action" /etc/audit/auditd.conf
     exit-status: 0
     stdout:
-    - 'max_log_file_action = {{ .Vars.ubuntu20cis_auditd.max_log_file_action }}'
+    - 'max_log_file_action = keep_logs'
     meta:
       server: 2
       workstation: 2

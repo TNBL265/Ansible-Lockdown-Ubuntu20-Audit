@@ -1,5 +1,4 @@
-{{ if not .Vars.ubuntu20cis_squid_server }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_13 }}
+{{ if .Vars.ubuntu20cis_rule_2_1_13 }}
 package:
   squid:
     title: 2.1.13 | Ensure HTTP Proxy Server is not installed
@@ -8,5 +7,4 @@ package:
       server: 1
       workstation: 1
       CIS_ID: 2.1.13
-  {{ end }}
 {{ end }}
